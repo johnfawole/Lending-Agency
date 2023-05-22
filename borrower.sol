@@ -77,10 +77,10 @@
     }
 
     function newProposal(uint loanId, uint rate) public payable {
-        if(loanList[loanId].borrower == address(0) || loanList[loanId.state] != LoanState.Accepting)
+        if(loanList[loanId].borrower == address(0) || loanList[loanId].state != LoanState.Accepting)
         return;   
 
-        proposalList.push(Proposal(msg.sender, loanId, ProposalState.waiting, rate, msg.value));
+        proposalList.push(Proposal(msg.sender, loanId, ProposalState.Waiting, rate, msg.value));
         lendMap[msg.sender].push(proposalList.length -1);
 
         loanList[loanId].proposalCount++;
@@ -144,5 +144,6 @@
     function numTotalLoans() public view returns (uint) {
      return loanList.length;
     }
+    
+}
 
-  }
